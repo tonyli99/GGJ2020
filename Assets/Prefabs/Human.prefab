@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3651535660237347030}
   - component: {fileID: 3651535660237347027}
   - component: {fileID: 3651535660237347024}
-  - component: {fileID: 3651535660237347026}
   m_Layer: 0
   m_Name: AttackTrigger
   m_TagString: Untagged
@@ -93,24 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5240719ceebdc4cb28893c37514581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToDamage: Enemy
+  tagToDamage: Player
   attackDamage: 5
---- !u!114 &3651535660237347026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3651535660237347031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints: 10
-  damageFlashDuration: 1
-  colorToFlash: {r: 0, g: 0, b: 0, a: 0}
-  deathPrefab: {fileID: 0}
 --- !u!1 &3651535660788556596
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 8021628783947086747}
   - {fileID: 3651535660237347025}
+  - {fileID: 7467663906619752959}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,6 +217,7 @@ MonoBehaviour:
   attackCollider: {fileID: 3651535660237347031}
   attackDuration: 1
   timeToCheckHit: 0.5
+  attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
   state: 0
 --- !u!210 &3651535660788556588
 SortingGroup:
@@ -286,8 +271,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c776168a412f50a4c9a98d3610cbc7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenMovementChange: 5
+  screamSound: {fileID: 8300000, guid: 83047548ac852504285f0e58c16632ba, type: 3}
   state: 0
   movement: {x: 0, y: 0}
+--- !u!1 &7790601492329108192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7467663906619752959}
+  - component: {fileID: 8807435327244252913}
+  - component: {fileID: 6489308366084954452}
+  - component: {fileID: 1601805052166063165}
+  m_Layer: 0
+  m_Name: VisionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7467663906619752959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790601492329108192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3651535660788556593}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8807435327244252913
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790601492329108192}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &6489308366084954452
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790601492329108192}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1601805052166063165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790601492329108192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2a15a8096e5af4bb9954eeb81108de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seesEnemy: 0
 --- !u!1001 &3651535661230455126
 PrefabInstance:
   m_ObjectHideFlags: 0
