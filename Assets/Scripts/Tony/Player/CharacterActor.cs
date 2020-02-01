@@ -7,8 +7,8 @@ public class CharacterActor : MonoBehaviour
     [Header("Speeds")]
     public float verticalSpeed = 3;
     public float horizontalSpeed = 5;
-    public float sprintSpeed = 10;
-    public float sprintDuration = 2;
+    public float sprintSpeed = 15;
+    public float sprintDuration = 1;
     public float sprintCooldownDuration = 5;
 
     [Header("Animator")]
@@ -18,6 +18,7 @@ public class CharacterActor : MonoBehaviour
 
     [Header("Attack")]
     public GameObject attackCollider;
+    public float timeToCheckHit = 0.5f;
 
     public Vector2 movement { get; set; }
 
@@ -26,7 +27,8 @@ public class CharacterActor : MonoBehaviour
     private float nextSprintTime;
 
     public enum State { Idle, Sprinting, Attacking, Dead }
-    private State state = State.Idle;
+    [Header("Debug")]
+    public State state = State.Idle;
 
     private void Awake()
     {
@@ -65,14 +67,16 @@ public class CharacterActor : MonoBehaviour
     public void Attack()
     {
         if (state != State.Idle) return;
-        state = State.Attacking;
         StartCoroutine(AttackCoroutine());
     }
 
     IEnumerator AttackCoroutine()
     {
+        state = State.Attacking;
+        yield return new WaitForSeconds(timeToCheckHit);
+        attackCollider.SetActive(true);
         yield return null;
-
+        attackCollider.SetActive(false);
         state = State.Idle;
     }
 }

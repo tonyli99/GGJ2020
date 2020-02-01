@@ -6,7 +6,9 @@ public class PlayerInput : MonoBehaviour
 {
     public string horizontalAxis = "Horizontal";
     public string verticalAxis = "Vertical";
-    public string sprint = "Fire1";
+    public string attack = "Fire1";
+    public string sprint = "Fire2";
+    public string pickup = "Pickup";
 
     private CharacterActor actor;
 
@@ -19,6 +21,8 @@ public class PlayerInput : MonoBehaviour
     {
         actor.movement = new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis));
         if (Input.GetButtonDown(sprint)) actor.Sprint();
+        else if (Input.GetButtonDown(attack)) actor.Attack();
+        else if (Input.GetButtonDown(pickup)) Debug.Log("Pick up");
     }
 
 }
