@@ -20,6 +20,7 @@ public class CharacterActor : MonoBehaviour
     public GameObject attackCollider;
     public float attackDuration = 1f;
     public float timeToCheckHit = 0.5f;
+    public AudioClip attackSound;
 
     public Vector2 movement { get; set; }
 
@@ -68,6 +69,7 @@ public class CharacterActor : MonoBehaviour
     public void Attack()
     {
         if (state != State.Idle) return;
+        AudioSource.PlayClipAtPoint(attackSound, Camera.main.transform.position);
         StartCoroutine(AttackCoroutine());
     }
 

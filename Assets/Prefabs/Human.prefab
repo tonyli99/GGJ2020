@@ -217,6 +217,7 @@ MonoBehaviour:
   attackCollider: {fileID: 3651535660237347031}
   attackDuration: 1
   timeToCheckHit: 0.5
+  attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
   state: 0
 --- !u!210 &3651535660788556588
 SortingGroup:
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenMovementChange: 5
+  screamSound: {fileID: 8300000, guid: 83047548ac852504285f0e58c16632ba, type: 3}
   state: 0
   movement: {x: 0, y: 0}
 --- !u!1 &7790601492329108192

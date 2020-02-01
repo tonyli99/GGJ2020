@@ -7,6 +7,7 @@ public class HumanAI : MonoBehaviour
     private CharacterActor actor;
 
     public float timeBetweenMovementChange = 5f;
+    public AudioClip screamSound;
 
     public enum State { Wander, Attack, Dead }
     [Header("Debug")]
@@ -31,6 +32,7 @@ public class HumanAI : MonoBehaviour
                 {
                     if (Random.value < 0.5f)
                     {
+                        AudioSource.PlayClipAtPoint(screamSound, Camera.main.transform.position);
                         movement = new Vector2(1, 0);
                         nextDirectionChange = Time.time + timeBetweenMovementChange;
                     }
