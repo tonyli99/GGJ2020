@@ -14,6 +14,7 @@ public class CharacterActor : MonoBehaviour
     [Header("Animator")]
     public string idleParameter;
     public string runParameter;
+    public string hopParameter;
     public string[] attackParameters;
 
     [Header("Attack")]
@@ -48,9 +49,14 @@ public class CharacterActor : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                if (movement.magnitude > 0.01f && currentAnimParameter != runParameter)
+                if (movement.magnitude > 0.01f)
                 {
-                    AnimatorCrossFade(runParameter);
+                    var numLegs = GetNumLegs();
+                    var desiredParam = (numLegs == 1) ? hopParameter : runParameter;
+                    if (currentAnimParameter != desiredParam)
+                    {
+                        AnimatorCrossFade(desiredParam);
+                    }
                 }
                 else if (movement.magnitude < 0.01f && currentAnimParameter != idleParameter)
                 {
@@ -71,7 +77,20 @@ public class CharacterActor : MonoBehaviour
     {
         animator.CrossFade(parameter, 0.3f);
         currentAnimParameter = parameter;
+    }
 
+    public int GetNumLegs()
+    {
+        var limbs = GetComponentsInChildren<Limb>();
+        int count = 0;
+        foreach (var limb in limbs)
+        {
+            if (limb.name == "front_thigh" || limb.name == "back_thigh")
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     private void Idle()
@@ -120,7 +139,6 @@ public class CharacterActor : MonoBehaviour
 
     public void Pickup()
     {
-        Debug.Log("Pick Up");
         body.ReplaceWith(controller.touchingLimb);
     }
 }

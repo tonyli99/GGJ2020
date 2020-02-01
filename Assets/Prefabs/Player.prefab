@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 8167323912115716730}
   - component: {fileID: 329592703}
   - component: {fileID: 7550005807395084742}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -212,12 +212,17 @@ MonoBehaviour:
   sprintSpeed: 15
   sprintDuration: 1
   sprintCooldownDuration: 5
-  idleParameter: 
-  runParameter: 
-  attackParameters: []
+  idleParameter: Zidle
+  runParameter: Zwalk
+  hopParameter: Zhop
+  attackParameters:
+  - Zattack
+  - ZBite
   attackCollider: {fileID: 8167323911589034368}
   attackDuration: 1
   timeToCheckHit: 0.5
+  attackSound: {fileID: 8300000, guid: 8eed8d9522335ff48b2ff6490d4b6b66, type: 3}
+  currentAnimParameter: 
   state: 0
 --- !u!114 &8167323912115716709
 MonoBehaviour:
@@ -293,7 +298,7 @@ MonoBehaviour:
   hitPoints: 100
   damageFlashDuration: 1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
-  deathPrefab: {fileID: 0}
+  deathPrefabs: []
 --- !u!1001 &8167323910694557697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,16 +311,31 @@ PrefabInstance:
       propertyPath: hostBody
       value: 
       objectReference: {fileID: 329592703}
+    - target: {fileID: 3101064291887722235, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3354178496403587052, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: hostBody
+      value: 
+      objectReference: {fileID: 329592703}
+    - target: {fileID: 3354178496403587052, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812157128369093936, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
       propertyPath: hostBody
       value: 
       objectReference: {fileID: 329592703}
     - target: {fileID: 3812157128369093936, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
-      propertyPath: hostBody
-      value: 
-      objectReference: {fileID: 329592703}
+      propertyPath: maxTime
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5180124957287439768, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
       propertyPath: m_Name
@@ -326,11 +346,21 @@ PrefabInstance:
       propertyPath: hostBody
       value: 
       objectReference: {fileID: 329592703}
+    - target: {fileID: 5291950721194582338, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 5491971509497143754, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
       propertyPath: hostBody
       value: 
       objectReference: {fileID: 329592703}
+    - target: {fileID: 5491971509497143754, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 6772939635438453453, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
       propertyPath: m_LocalPosition.x
