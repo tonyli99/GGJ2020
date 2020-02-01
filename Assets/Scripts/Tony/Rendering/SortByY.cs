@@ -14,6 +14,6 @@ public class SortByY : MonoBehaviour
 
     private void Update()
     {
-        sortingGroup.sortingOrder = (int)transform.position.y * 100;
+        sortingGroup.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
     }
 }
