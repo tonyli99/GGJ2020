@@ -120,6 +120,7 @@ public class CharacterActor : MonoBehaviour
 
     public void Pickup()
     {
+        Debug.Log("Pick Up");
         body.ReplaceWith(controller.touchingLimb);
     }
 }

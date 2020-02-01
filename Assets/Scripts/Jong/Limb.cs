@@ -12,7 +12,7 @@ public class Limb : MonoBehaviour
 
     public Body hostBody;
 
-    Vector3 ground;
+    Transform oldBody;
     List<SpriteRenderer> spriteList;
     Collider2D col;
     private void Awake()
@@ -41,7 +41,7 @@ public class Limb : MonoBehaviour
     {
         if (hostBody == null)
         {
-            decayMultiplier = .5f;
+            decayMultiplier = 1f;
             Decay();
         }
         else if (hostBody.hostType == Body.HostType.Zombie)
@@ -60,8 +60,8 @@ public class Limb : MonoBehaviour
         {
             if (hostBody != null)
             {
-                ground = hostBody.transform.position;
-                ground.x = ground.x + Random.value * 0.2f;
+                oldBody = hostBody.transform;
+                //ground.x = ground.x + Random.value * 0.2f;
                 hostBody.LostPart(partType);
 
             }
@@ -78,10 +78,12 @@ public class Limb : MonoBehaviour
 
     IEnumerator DroppingAnimation()
     {
+        Vector3 dropPos =  oldBody.position;
+        transform.localScale = Vector3.one;
         Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
         for (float t = 0; t <= 1; t += Time.deltaTime * 2.0f)
         {
-            transform.position = Vector3.Lerp(transform.position, ground, t);
+            transform.position = Vector3.Lerp(transform.position, dropPos, t);
             transform.rotation = Quaternion.Lerp(transform.rotation, q, t);
             foreach (Transform ct in transform)
             {
@@ -90,11 +92,15 @@ public class Limb : MonoBehaviour
             yield return null;
         }
 
-        col.enabled = true;
+        if (currentTime < maxTime)
+        {
+            col.enabled = true;
+        }
     }
 
     public void Drop()
     {
+        oldBody = hostBody.transform;
         hostBody = null;
         transform.parent = null;
 
@@ -124,4 +130,5 @@ public class Limb : MonoBehaviour
     {
         currentTime += damage;
     }
+
 }
