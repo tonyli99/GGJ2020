@@ -6,7 +6,7 @@ public class Body : MonoBehaviour
 {
     Dictionary<Limb.PartType, Limb> bodyParts;
     Dictionary<Limb.PartType, Transform> partMountPoint;
-    Dictionary<Limb.PartType, float> maxDecayTime;
+    //Dictionary<Limb.PartType, float> maxDecayTime;
     public enum HostType { Human, Zombie };
     public HostType hostType;
 
@@ -16,11 +16,11 @@ public class Body : MonoBehaviour
     public Transform leftLegPoint;
     public Transform rightLegPoint;
 
-    public float headMaxDecayTime;
-    public float leftArmMaxDecayTime;
-    public float rightArmMaxDecayTime;
-    public float leftLegMaxDecayTime;
-    public float rightLegMaxDecayTime;
+    //public float headMaxDecayTime;
+    //public float leftArmMaxDecayTime;
+    //public float rightArmMaxDecayTime;
+    //public float leftLegMaxDecayTime;
+    //public float rightLegMaxDecayTime;
 
     public Transform bodyTranform;
 
@@ -34,12 +34,12 @@ public class Body : MonoBehaviour
         partMountPoint[Limb.PartType.LeftLeg] = leftLegPoint;
         partMountPoint[Limb.PartType.RightLeg] = rightLegPoint;
 
-        maxDecayTime = new Dictionary<Limb.PartType, float>(5);
-        maxDecayTime[Limb.PartType.Head] = headMaxDecayTime;
-        maxDecayTime[Limb.PartType.LeftArm] = leftArmMaxDecayTime;
-        maxDecayTime[Limb.PartType.RightArm] = rightArmMaxDecayTime;
-        maxDecayTime[Limb.PartType.LeftLeg] = leftLegMaxDecayTime;
-        maxDecayTime[Limb.PartType.RightLeg] = rightLegMaxDecayTime;
+        //maxDecayTime = new Dictionary<Limb.PartType, float>(5);
+        //maxDecayTime[Limb.PartType.Head] = headMaxDecayTime;
+        //maxDecayTime[Limb.PartType.LeftArm] = leftArmMaxDecayTime;
+        //maxDecayTime[Limb.PartType.RightArm] = rightArmMaxDecayTime;
+        //maxDecayTime[Limb.PartType.LeftLeg] = leftLegMaxDecayTime;
+        //maxDecayTime[Limb.PartType.RightLeg] = rightLegMaxDecayTime;
     }
 
     // replace or attach body part

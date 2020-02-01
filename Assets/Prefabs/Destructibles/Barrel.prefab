@@ -195,6 +195,7 @@ MonoBehaviour:
   deathPrefabs:
   - {fileID: 1353783899555650127, guid: d7cf47eff57c38840901d799cd57401d, type: 3}
   - {fileID: 3384325295267964052, guid: e5b86aca178111f45bf4a135759a4ddb, type: 3}
+  - {fileID: 3716547937959818976, guid: f56fa3b0d14b61840b32b3abe2da322b, type: 3}
 --- !u!210 &1753879426179914219
 SortingGroup:
   m_ObjectHideFlags: 0
