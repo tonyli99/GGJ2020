@@ -15,6 +15,8 @@ public class Body : MonoBehaviour
     public Transform leftLegPoint;
     public Transform rightLegPoint;
 
+    public Transform bodyTranform;
+
     private void Awake()
     {
         bodyParts = new Dictionary<Limb.PartType, Limb>(5);
@@ -56,8 +58,25 @@ public class Body : MonoBehaviour
         {
             Limb droppingPart = bodyParts[pt];
             bodyParts[pt] = null;
-            ///TODO: create an dummy object and attach part to it
             droppingPart.Drop();
+        }
+    }
+
+    public void LostPart(Limb.PartType pt)
+    {
+        DropPart(pt);
+        if (bodyParts[Limb.PartType.LeftLeg] == null && bodyParts[Limb.PartType.RightArm] == null)
+        {
+            StartCoroutine("DropDeadAnimation");
+        }
+    }
+
+    IEnumerator DropDeadAnimation()
+    {
+        for (float t = 0; t <= 1; t += Time.deltaTime * 2.0f)
+        {
+            bodyTranform.position = Vector3.Lerp(bodyTranform.position, transform.position, t);
+            yield return null;
         }
     }
 }

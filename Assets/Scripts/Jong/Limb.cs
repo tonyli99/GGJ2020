@@ -13,10 +13,12 @@ public class Limb : MonoBehaviour
     public Body hostBody;
 
     Vector3 ground;
-    SpriteRenderer sr;
+    List<SpriteRenderer> spriteList;
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        spriteList = new List<SpriteRenderer>();
+        spriteList.Add(GetComponent<SpriteRenderer>());
+        spriteList.AddRange(GetComponentsInChildren<SpriteRenderer>());
 
     }
     // Start is called before the first frame update
@@ -57,22 +59,27 @@ public class Limb : MonoBehaviour
             {
                 ground = hostBody.transform.position;
                 ground.x = ground.x + Random.value * 0.2f;
-                hostBody.DropPart(partType);
+                hostBody.LostPart(partType);
+
             }
             currentTime = maxTime;
         }
 
-        Color c = sr.color;
-        c.g = 1 - currentTime / maxTime;
-        sr.color = c;
+        foreach (var sr in spriteList)
+        {
+            Color c = sr.color;
+            c.g = 1 - currentTime / maxTime;
+            sr.color = c;
+        }
     }
 
     IEnumerator DroppingAnimation()
     {
-        for (float t = 0; t <= .5f; t += Time.deltaTime)
+        Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
+        for (float t = 0; t <= 1; t += Time.deltaTime * 2.0f)
         {
-            Vector3 pos = transform.position;
             transform.position = Vector3.Lerp(transform.position, ground, t);
+            transform.rotation = Quaternion.Lerp(transform.rotation, q, t);
             yield return null;
         }
     }
@@ -92,9 +99,13 @@ public class Limb : MonoBehaviour
         transform.parent = mountPoint;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        Color c = sr.color;
-        c = Color.green;
-        sr.color = c;
+
+        foreach (var sr in spriteList)
+        {
+            Color c = sr.color;
+            c = Color.green;
+            sr.color = c;
+        }
         Decay();
     }
 }
