@@ -14,10 +14,10 @@ public class Limb : MonoBehaviour
 
     Vector3 ground;
     List<SpriteRenderer> spriteList;
-    Collider2D collider;
+    Collider2D col;
     private void Awake()
     {
-        collider = GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
         spriteList = new List<SpriteRenderer>();
         spriteList.Add(GetComponent<SpriteRenderer>());
         spriteList.AddRange(GetComponentsInChildren<SpriteRenderer>());
@@ -90,7 +90,7 @@ public class Limb : MonoBehaviour
             yield return null;
         }
 
-        collider.enabled = true;
+        col.enabled = true;
     }
 
     public void Drop()
@@ -115,8 +115,13 @@ public class Limb : MonoBehaviour
             c = Color.green;
             sr.color = c;
         }
-        collider.enabled = false;
+        col.enabled = false;
 
         Decay();
+    }
+
+    public void AddDamage(float damage)
+    {
+        currentTime += damage;
     }
 }

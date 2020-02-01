@@ -83,4 +83,12 @@ public class Body : MonoBehaviour
             yield return null;
         }
     }
+
+    public void TakeDamange(float damange)
+    {
+        foreach (Limb part in bodyParts.Values)
+        {
+            part.AddDamage(damange);
+        }
+    }
 }
