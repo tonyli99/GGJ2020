@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour
         actor.movement = new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis));
         if (Input.GetButtonDown(sprint)) actor.Sprint();
         else if (Input.GetButtonDown(attack)) actor.Attack();
-        else if (Input.GetButtonDown(pickup)) Debug.Log("Pick up");
+        else if (Input.GetButtonDown(pickup)) actor.Pickup();
     }
 
 }

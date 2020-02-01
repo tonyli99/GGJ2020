@@ -38,7 +38,7 @@ public class Limb : MonoBehaviour
     {
         if (hostBody == null)
         {
-            decayMultiplier = 1;
+            decayMultiplier = .5f;
             Decay();
         }
         else if (hostBody.hostType == Body.HostType.Zombie)

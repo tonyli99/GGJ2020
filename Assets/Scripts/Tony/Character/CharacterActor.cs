@@ -27,6 +27,7 @@ public class CharacterActor : MonoBehaviour
     private CharacterController2D controller;
     private int currentAttackIndex;
     private float nextSprintTime;
+    private Body body;
 
     public enum State { Idle, Sprinting, Attacking, Dead }
     [Header("Debug")]
@@ -35,6 +36,7 @@ public class CharacterActor : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
+        body = GetComponent<Body>();
     }
 
     private void Update()
@@ -86,5 +88,10 @@ public class CharacterActor : MonoBehaviour
             yield return null;
         }
         state = State.Idle;
+    }
+
+    public void Pickup()
+    {
+        body.ReplaceWith(controller.touchingLimb);
     }
 }

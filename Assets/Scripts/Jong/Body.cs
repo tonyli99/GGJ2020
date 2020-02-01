@@ -42,6 +42,10 @@ public class Body : MonoBehaviour
     // replace or attach body part
     public void ReplaceWith(Limb newPart)
     {
+        if (newPart == null)
+        {
+            return;
+        }
         DropPart(newPart.partType);
         bodyParts[newPart.partType] = newPart;
         bodyParts[newPart.partType].Reattach(this);
