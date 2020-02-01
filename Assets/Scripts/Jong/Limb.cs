@@ -15,13 +15,14 @@ public class Limb : MonoBehaviour
     Transform oldBody;
     List<SpriteRenderer> spriteList;
     Collider2D col;
+    Color currentColor;
     private void Awake()
     {
         col = GetComponent<Collider2D>();
         spriteList = new List<SpriteRenderer>();
         spriteList.Add(GetComponent<SpriteRenderer>());
         spriteList.AddRange(GetComponentsInChildren<SpriteRenderer>());
-
+        currentColor = Color.grey;
     }
     // Start is called before the first frame update
     void Start()
@@ -31,9 +32,6 @@ public class Limb : MonoBehaviour
         {
             hostBody.ReplaceWith(this);
         }
-        //Color c = sr.color;
-        //c = Color.green;
-        //sr.color = c;
     }
 
     // Update is called once per frame
@@ -68,10 +66,10 @@ public class Limb : MonoBehaviour
             currentTime = maxTime;
         }
 
+        Color c = currentColor * (1 - currentTime / maxTime);
+        c.a = 1;
         foreach (var sr in spriteList)
         {
-            Color c = sr.color;
-            c.g = 1 - currentTime / maxTime;
             sr.color = c;
         }
     }
@@ -91,6 +89,9 @@ public class Limb : MonoBehaviour
             }
             yield return null;
         }
+
+        currentColor = Color.grey;
+        Decay();
 
         if (currentTime < maxTime)
         {
@@ -114,13 +115,8 @@ public class Limb : MonoBehaviour
         transform.parent = mountPoint;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        currentColor = Color.green;
 
-        foreach (var sr in spriteList)
-        {
-            Color c = sr.color;
-            c = Color.green;
-            sr.color = c;
-        }
         col.enabled = false;
 
         Decay();
