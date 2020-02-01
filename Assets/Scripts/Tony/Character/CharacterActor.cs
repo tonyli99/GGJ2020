@@ -25,6 +25,7 @@ public class CharacterActor : MonoBehaviour
     public Vector2 movement { get; set; }
 
     private CharacterController2D controller;
+    private Animator animator;
     private int currentAttackIndex;
     private float nextSprintTime;
     private Body body;
@@ -36,6 +37,7 @@ public class CharacterActor : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
+        animator = GetComponentInChildren<Animator>();
         body = GetComponent<Body>();
     }
 
@@ -55,17 +57,24 @@ public class CharacterActor : MonoBehaviour
         }
     }
 
+    private void Idle()
+    {
+        state = State.Idle;
+        animator.CrossFade(idleParameter, 0.3f);
+    }
+
     public void Sprint()
     {
         if (Time.time < nextSprintTime) return;
         nextSprintTime = Time.time + sprintCooldownDuration;
         state = State.Sprinting;
+        animator.CrossFade(runParameter, 0.3f);
         Invoke("StopSprinting", sprintDuration);
     }
 
     public void StopSprinting()
     {
-        if (state == State.Sprinting) state = State.Idle;
+        if (state == State.Sprinting) Idle();
     }
 
     public void Attack()
@@ -79,6 +88,8 @@ public class CharacterActor : MonoBehaviour
     {
         float doneTime = Time.time + attackDuration;
         state = State.Attacking;
+        animator.CrossFade(attackParameters[currentAttackIndex], 0.3f);
+        currentAttackIndex = (currentAttackIndex + 1) % attackParameters.Length;
         yield return new WaitForSeconds(timeToCheckHit);
         attackCollider.SetActive(true);
         yield return new WaitForSeconds(0.1f);

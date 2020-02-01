@@ -211,9 +211,10 @@ MonoBehaviour:
   sprintSpeed: 15
   sprintDuration: 1
   sprintCooldownDuration: 5
-  idleParameter: 
-  runParameter: 
-  attackParameters: []
+  idleParameter: ZIdle
+  runParameter: HWalk
+  attackParameters:
+  - ZWalk
   attackCollider: {fileID: 3651535660237347031}
   attackDuration: 1
   timeToCheckHit: 0.5
