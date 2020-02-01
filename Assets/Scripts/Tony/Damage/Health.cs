@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
     public float hitPoints = 10;
     public float damageFlashDuration = 1;
     public Color colorToFlash = Color.red;
-    public GameObject deathPrefab;
+    public GameObject[] deathPrefabs;
 
     private SpriteRenderer[] spriteRenderers;
     private Shader flashShader;
@@ -29,7 +29,10 @@ public class Health : MonoBehaviour
         if (hitPoints <= 0)
         {
             Destroy(gameObject);
-            if (deathPrefab != null) Instantiate(deathPrefab, transform.position, Quaternion.identity);
+            foreach (var deathPrefab in deathPrefabs)
+            {
+                if (deathPrefab != null) Instantiate(deathPrefab, transform.position, Quaternion.identity);
+            }
         }
         else
         {

@@ -42,6 +42,10 @@ public class Body : MonoBehaviour
     // replace or attach body part
     public void ReplaceWith(Limb newPart)
     {
+        if (newPart == null)
+        {
+            return;
+        }
         DropPart(newPart.partType);
         bodyParts[newPart.partType] = newPart;
         bodyParts[newPart.partType].Reattach(this);
@@ -77,6 +81,14 @@ public class Body : MonoBehaviour
         {
             bodyTranform.position = Vector3.Lerp(bodyTranform.position, transform.position, t);
             yield return null;
+        }
+    }
+
+    public void TakeDamange(float damange)
+    {
+        foreach (Limb part in bodyParts.Values)
+        {
+            part.AddDamage(damange);
         }
     }
 }

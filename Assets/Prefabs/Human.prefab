@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 3651535660788556589}
   - component: {fileID: 3651535660788556597}
   - component: {fileID: 3651535660788556600}
+  - component: {fileID: 3125293984499790200}
   m_Layer: 0
   m_Name: Human
   m_TagString: Enemy
@@ -194,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93b9b6204b8ce448ccc80d3130ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchingLimb: {fileID: 0}
 --- !u!114 &3651535660788556595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,13 +213,15 @@ MonoBehaviour:
   sprintSpeed: 15
   sprintDuration: 1
   sprintCooldownDuration: 5
-  idleParameter: 
-  runParameter: 
-  attackParameters: []
+  idleParameter: Zidle
+  runParameter: Hwalk
+  attackParameters:
+  - Zidle
   attackCollider: {fileID: 3651535660237347031}
   attackDuration: 1
   timeToCheckHit: 0.5
   attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
+  currentAnimParameter: 
   state: 0
 --- !u!210 &3651535660788556588
 SortingGroup:
@@ -257,8 +261,7 @@ MonoBehaviour:
   hitPoints: 20
   damageFlashDuration: 1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
-  deathPrefab: {fileID: 7679089153071199677, guid: 7a089f76c82476640b0f428f943de6b2,
-    type: 3}
+  deathPrefabs: []
 --- !u!114 &3651535660788556600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +278,25 @@ MonoBehaviour:
   screamSound: {fileID: 8300000, guid: 83047548ac852504285f0e58c16632ba, type: 3}
   state: 0
   movement: {x: 0, y: 0}
+--- !u!114 &3125293984499790200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3651535660788556596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b8862c3dd5c10448398884c3e8662b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostType: 0
+  headPoint: {fileID: 0}
+  leftArmPoint: {fileID: 0}
+  rightArmPoint: {fileID: 0}
+  leftLegPoint: {fileID: 0}
+  rightLegPoint: {fileID: 0}
+  bodyTranform: {fileID: 0}
 --- !u!1 &7790601492329108192
 GameObject:
   m_ObjectHideFlags: 0
