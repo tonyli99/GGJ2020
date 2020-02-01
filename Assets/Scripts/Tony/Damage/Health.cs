@@ -6,16 +6,16 @@ public class Health : MonoBehaviour
 {
     public float hitPoints = 10;
     public float damageFlashDuration = 1;
-    public Color colorToFlash;
+    public Color colorToFlash = Color.red;
     public GameObject deathPrefab;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer[] spriteRenderers;
     private Shader flashShader;
     private Shader originalShader = null; 
 
     private void Awake()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -39,18 +39,24 @@ public class Health : MonoBehaviour
 
     void Flash()
     {
-        if (spriteRenderer == null) return;
+        if (spriteRenderers.Length == 0) return;
         StartCoroutine(FlashCoroutine());
     }
 
     IEnumerator FlashCoroutine()
     {
-        if (spriteRenderer == null) yield break;
-        if (originalShader == null) originalShader = spriteRenderer.material.shader;
-        spriteRenderer.material.shader = flashShader;
-        spriteRenderer.color = colorToFlash;
+        if (spriteRenderers.Length == 0) yield break;
+        if (originalShader == null) originalShader = spriteRenderers[0].material.shader;
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            spriteRenderers[i].material.shader = flashShader;
+            spriteRenderers[i].color = colorToFlash;
+        }
         yield return new WaitForSeconds(damageFlashDuration);
-        spriteRenderer.material.shader = originalShader;
-        spriteRenderer.color = Color.white;
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            spriteRenderers[i].material.shader = originalShader;
+            spriteRenderers[i].color = Color.white;
+        }
     }
 }

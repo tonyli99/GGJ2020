@@ -17,6 +17,9 @@ public class CharacterController2D : MonoBehaviour
     {
         var newPosition = rb.position + movement * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
-        transform.localScale = new Vector3(Mathf.Sign(movement.x), 1, 1);
+        if (movement.x != 0)
+        {
+            transform.localScale = new Vector3(Mathf.Sign(movement.x), 1, 1);
+        }
     }
 }

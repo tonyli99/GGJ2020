@@ -18,6 +18,7 @@ public class CharacterActor : MonoBehaviour
 
     [Header("Attack")]
     public GameObject attackCollider;
+    public float attackDuration = 1f;
     public float timeToCheckHit = 0.5f;
 
     public Vector2 movement { get; set; }
@@ -72,11 +73,16 @@ public class CharacterActor : MonoBehaviour
 
     IEnumerator AttackCoroutine()
     {
+        float doneTime = Time.time + attackDuration;
         state = State.Attacking;
         yield return new WaitForSeconds(timeToCheckHit);
         attackCollider.SetActive(true);
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         attackCollider.SetActive(false);
+        while (Time.time < doneTime)
+        {
+            yield return null;
+        }
         state = State.Idle;
     }
 }
