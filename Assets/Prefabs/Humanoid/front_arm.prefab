@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 726078622381535822}
   - component: {fileID: 1352727896799962031}
   - component: {fileID: 8846635730147233211}
-  m_Layer: 0
+  - component: {fileID: 3406739663901498406}
+  m_Layer: 9
   m_Name: front_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +101,32 @@ MonoBehaviour:
   decayMultiplier: 1
   maxTime: 10
   hostBody: {fileID: 0}
+--- !u!61 &3406739663901498406
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568692876989505456}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.020179123, y: -0.2690547}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.53026867, y: 0.75829256}
+    oldSize: {x: 0.6666667, y: 1.0416666}
+    newSize: {x: 0.16, y: 0.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.49, y: 0.98}
+  m_EdgeRadius: 0
 --- !u!1 &4095751465118042389
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3042399573848541242}
   - component: {fileID: 4660400020041882883}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: front_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

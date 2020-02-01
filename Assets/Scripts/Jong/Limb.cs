@@ -14,8 +14,10 @@ public class Limb : MonoBehaviour
 
     Vector3 ground;
     List<SpriteRenderer> spriteList;
+    Collider2D collider;
     private void Awake()
     {
+        collider = GetComponent<Collider2D>();
         spriteList = new List<SpriteRenderer>();
         spriteList.Add(GetComponent<SpriteRenderer>());
         spriteList.AddRange(GetComponentsInChildren<SpriteRenderer>());
@@ -24,6 +26,7 @@ public class Limb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hostBody = GetComponentInParent<Body>();
         if (hostBody != null && hostBody.hostType == Body.HostType.Zombie)
         {
             hostBody.ReplaceWith(this);
@@ -80,8 +83,14 @@ public class Limb : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, ground, t);
             transform.rotation = Quaternion.Lerp(transform.rotation, q, t);
+            foreach (Transform ct in transform)
+            {
+                ct.localRotation = Quaternion.Lerp(ct.localRotation, Quaternion.identity, t);
+            }
             yield return null;
         }
+
+        collider.enabled = true;
     }
 
     public void Drop()
@@ -106,6 +115,8 @@ public class Limb : MonoBehaviour
             c = Color.green;
             sr.color = c;
         }
+        collider.enabled = false;
+
         Decay();
     }
 }
