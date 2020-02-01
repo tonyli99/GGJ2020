@@ -10,7 +10,7 @@ public class DamageTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(tagToDamage)) return;
-        //Debug.Log(name + " damaged " + collision, collision);
+        Debug.Log(name + " damaged " + collision, collision);
         collision.BroadcastMessage("TakeDamage", attackDamage);
     }
 }
