@@ -25,9 +25,11 @@ public class CharacterActor : MonoBehaviour
     public Vector2 movement { get; set; }
 
     private CharacterController2D controller;
+    private Animator animator;
     private int currentAttackIndex;
     private float nextSprintTime;
     private Body body;
+    public string currentAnimParameter;
 
     public enum State { Idle, Sprinting, Attacking, Dead }
     [Header("Debug")]
@@ -36,7 +38,9 @@ public class CharacterActor : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
+        animator = GetComponentInChildren<Animator>();
         body = GetComponent<Body>();
+        currentAnimParameter = idleParameter;
     }
 
     private void Update()
@@ -44,6 +48,14 @@ public class CharacterActor : MonoBehaviour
         switch (state)
         {
             case State.Idle:
+                if (movement.magnitude > 0.01f && currentAnimParameter != runParameter)
+                {
+                    AnimatorCrossFade(runParameter);
+                }
+                else if (movement.magnitude < 0.01f && currentAnimParameter != idleParameter)
+                {
+                    AnimatorCrossFade(idleParameter);
+                }
                 controller.movement = new Vector2(movement.x * horizontalSpeed, movement.y * verticalSpeed);
                 break;
             case State.Sprinting:
@@ -55,17 +67,31 @@ public class CharacterActor : MonoBehaviour
         }
     }
 
+    private void AnimatorCrossFade(string parameter)
+    {
+        animator.CrossFade(parameter, 0.3f);
+        currentAnimParameter = parameter;
+
+    }
+
+    private void Idle()
+    {
+        state = State.Idle;
+        AnimatorCrossFade(idleParameter);
+    }
+
     public void Sprint()
     {
         if (Time.time < nextSprintTime) return;
         nextSprintTime = Time.time + sprintCooldownDuration;
         state = State.Sprinting;
+        AnimatorCrossFade(runParameter);
         Invoke("StopSprinting", sprintDuration);
     }
 
     public void StopSprinting()
     {
-        if (state == State.Sprinting) state = State.Idle;
+        if (state == State.Sprinting) Idle();
     }
 
     public void Attack()
@@ -79,6 +105,8 @@ public class CharacterActor : MonoBehaviour
     {
         float doneTime = Time.time + attackDuration;
         state = State.Attacking;
+        AnimatorCrossFade(attackParameters[currentAttackIndex]);
+        currentAttackIndex = (currentAttackIndex + 1) % attackParameters.Length;
         yield return new WaitForSeconds(timeToCheckHit);
         attackCollider.SetActive(true);
         yield return new WaitForSeconds(0.1f);
@@ -87,7 +115,7 @@ public class CharacterActor : MonoBehaviour
         {
             yield return null;
         }
-        state = State.Idle;
+        Idle();
     }
 
     public void Pickup()

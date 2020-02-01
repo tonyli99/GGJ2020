@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93b9b6204b8ce448ccc80d3130ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchingLimb: {fileID: 0}
 --- !u!114 &3651535660788556595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,13 +212,15 @@ MonoBehaviour:
   sprintSpeed: 15
   sprintDuration: 1
   sprintCooldownDuration: 5
-  idleParameter: 
-  runParameter: 
-  attackParameters: []
+  idleParameter: Zidle
+  runParameter: Hwalk
+  attackParameters:
+  - Zidle
   attackCollider: {fileID: 3651535660237347031}
   attackDuration: 1
   timeToCheckHit: 0.5
   attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
+  currentAnimParameter: 
   state: 0
 --- !u!210 &3651535660788556588
 SortingGroup:
