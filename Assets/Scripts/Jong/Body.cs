@@ -44,7 +44,7 @@ public class Body : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(WaitAndDrop());
+        //StartCoroutine(WaitAndDrop());
     }
 
     IEnumerator WaitAndDrop()
