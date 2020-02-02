@@ -36,6 +36,8 @@ public class CharacterActor : MonoBehaviour
     [Header("Debug")]
     public State state = State.Idle;
 
+    public Limb touchingLimb;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController2D>();
@@ -149,11 +151,33 @@ public class CharacterActor : MonoBehaviour
 
     public void Pickup()
     {
-        body.ReplaceWith(controller.touchingLimb);
+        body.ReplaceWith(touchingLimb);
     }
 
     public void StopAnimator()
     {
         animator.Rebind();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Potion potion = collision.gameObject.GetComponent<Potion>();
+        if (potion != null)
+        {
+            float energy = potion.energy;
+            body.TakePotion(energy);
+            return;
+        }
+        touchingLimb = collision.gameObject.GetComponent<Limb>();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Limb limb = collision.gameObject.GetComponent<Limb>();
+        if (limb == touchingLimb)
+        {
+            touchingLimb = null;
+        }
     }
 }
