@@ -53,10 +53,17 @@ public class CharacterActor : MonoBehaviour
                 if (movement.magnitude > 0.01f)
                 {
                     var numLegs = GetNumLegs();
-                    var desiredParam = (numLegs == 1) ? hopParameter : runParameter;
-                    if (currentAnimParameter != desiredParam)
+                    if (numLegs == 0 && name == "Player")
                     {
-                        AnimatorCrossFade(desiredParam);
+                        GameOverScreen.GameOver();
+                    }
+                    else
+                    {
+                        var desiredParam = (numLegs == 1) ? hopParameter : runParameter;
+                        if (currentAnimParameter != desiredParam)
+                        {
+                            AnimatorCrossFade(desiredParam);
+                        }
                     }
                 }
                 else if (movement.magnitude < 0.01f && currentAnimParameter != idleParameter)
@@ -106,11 +113,13 @@ public class CharacterActor : MonoBehaviour
         nextSprintTime = Time.time + sprintCooldownDuration;
         state = State.Sprinting;
         AnimatorCrossFade(runParameter);
+        animator.speed = 3;
         Invoke("StopSprinting", sprintDuration);
     }
 
     public void StopSprinting()
     {
+        animator.speed = 1;
         if (state == State.Sprinting) Idle();
     }
 

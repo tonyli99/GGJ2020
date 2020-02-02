@@ -1378,8 +1378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef05630609085d449eb0dfb9f4921f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 3
-  horizontalSpeed: 5
+  verticalSpeed: 1
+  horizontalSpeed: 2
   sprintSpeed: 15
   sprintDuration: 1
   sprintCooldownDuration: 5
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 20
+  hitPoints: 30
   damageFlashDuration: 1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
   deathPrefabs: []
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDamage: Player
-  attackDamage: 5
+  attackDamage: 10
 --- !u!1 &7279534542321303474
 GameObject:
   m_ObjectHideFlags: 0
