@@ -122,7 +122,10 @@ public class Body : MonoBehaviour
     {
         foreach (Limb part in bodyParts.Values)
         {
-            part.AddDamage(damange);
+            if (part != null)
+            {
+                part.AddDamage(damange);
+            }
         }
     }
 
