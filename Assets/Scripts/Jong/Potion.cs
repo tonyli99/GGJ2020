@@ -5,6 +5,13 @@ using UnityEngine;
 public class Potion : MonoBehaviour
 {
     public float energy;
+    public AudioClip drinkSound;
+
+    private void Start()
+    {
+        transform.position += Vector3.up;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,7 +21,9 @@ public class Potion : MonoBehaviour
     ///TODO: animation
     IEnumerator DisappearAnim()
     {
-        yield return new WaitForSeconds(.2f);
+        AudioSource.PlayClipAtPoint(drinkSound, Camera.main.transform.position);
+        GetComponent<Animator>().Play("drink");
+        yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
     }
 }
