@@ -189,13 +189,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 10
-  damageFlashDuration: 0.5
+  hitPoints: 5
+  damageFlashDuration: 0.1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
   deathPrefabs:
   - {fileID: 1353783899555650127, guid: 5883bb5c77fa49643a53fbf58ce291ee, type: 3}
   - {fileID: 3384325295267964052, guid: 58849837640abc047b0997367aa5d905, type: 3}
   - {fileID: 8129787173596254676, guid: b88301964480995448fc65368ba0108e, type: 3}
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!210 &1753879426179914219
 SortingGroup:
   m_ObjectHideFlags: 0
