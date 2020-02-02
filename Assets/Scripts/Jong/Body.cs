@@ -118,7 +118,7 @@ public class Body : MonoBehaviour
         }
     }
 
-    public void TakeDamange(float damange)
+    public void TakeDamage(float damange)
     {
         foreach (Limb part in bodyParts.Values)
         {
@@ -131,6 +131,6 @@ public class Body : MonoBehaviour
 
     public void TakePotion(float life)
     {
-        TakeDamange(-life);
+        TakeDamage(-life);
     }
 }

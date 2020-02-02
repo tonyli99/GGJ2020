@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 8167323912115716731}
   - component: {fileID: 8167323912115716730}
   - component: {fileID: 329592703}
-  - component: {fileID: 7550005807395084742}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -194,7 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93b9b6204b8ce448ccc80d3130ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchingLimb: {fileID: 0}
 --- !u!114 &8167323912115716708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +222,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 8eed8d9522335ff48b2ff6490d4b6b66, type: 3}
   currentAnimParameter: 
   state: 0
+  touchingLimb: {fileID: 0}
 --- !u!114 &8167323912115716709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,22 +282,7 @@ MonoBehaviour:
   leftLegPoint: {fileID: 5516931065563253303}
   rightLegPoint: {fileID: 7590485464560526551}
   bodyTranform: {fileID: 4604319854087186721}
---- !u!114 &7550005807395084742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8167323912115716707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints: 100
-  damageFlashDuration: 1
-  colorToFlash: {r: 1, g: 0, b: 0, a: 1}
-  deathPrefabs: []
+  ca: {fileID: 0}
 --- !u!1001 &8167323910694557697
 PrefabInstance:
   m_ObjectHideFlags: 0

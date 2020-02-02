@@ -1365,7 +1365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93b9b6204b8ce448ccc80d3130ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchingLimb: {fileID: 0}
 --- !u!114 &5497464061365673142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,6 +1393,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
   currentAnimParameter: 
   state: 0
+  touchingLimb: {fileID: 0}
 --- !u!210 &5497464061365673129
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1429,10 +1429,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 30
-  damageFlashDuration: 1
+  hitPoints: 20
+  damageFlashDuration: 0.1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
   deathPrefabs: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5497464061365673149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,6 +1471,7 @@ MonoBehaviour:
   leftLegPoint: {fileID: 0}
   rightLegPoint: {fileID: 0}
   bodyTranform: {fileID: 0}
+  ca: {fileID: 0}
 --- !u!1 &5497464061912819538
 GameObject:
   m_ObjectHideFlags: 0

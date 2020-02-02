@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec93b9b6204b8ce448ccc80d3130ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchingLimb: {fileID: 0}
 --- !u!114 &3651535660788556595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +226,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 57f72b25420768b4fb384f6bfe29999b, type: 3}
   currentAnimParameter: 
   state: 0
+  touchingLimb: {fileID: 0}
 --- !u!210 &3651535660788556588
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -262,10 +262,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b252ce43b3c654288f758084c0c087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 15
-  damageFlashDuration: 1
+  hitPoints: 10
+  damageFlashDuration: 0.1
   colorToFlash: {r: 1, g: 0, b: 0, a: 1}
   deathPrefabs: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3300298482525166254}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3125293984499790200}
+        m_MethodName: DropAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3651535660788556600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +574,12 @@ PrefabInstance:
 --- !u!4 &8021628783947086747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6772939635438453453, guid: e0cce88d31a98fc4997c935a036ca09a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3651535661230455126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3300298482525166254 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2261334425191293944, guid: e0cce88d31a98fc4997c935a036ca09a,
     type: 3}
   m_PrefabInstance: {fileID: 3651535661230455126}
   m_PrefabAsset: {fileID: 0}

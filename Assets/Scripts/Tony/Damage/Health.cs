@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Health : MonoBehaviour
     public float damageFlashDuration = 1;
     public Color colorToFlash = Color.red;
     public GameObject[] deathPrefabs;
+
+    public UnityEvent onDie = new UnityEvent();
 
     private SpriteRenderer[] spriteRenderers;
     private Shader flashShader;
@@ -28,6 +31,7 @@ public class Health : MonoBehaviour
         hitPoints -= damage;
         if (hitPoints <= 0)
         {
+            onDie.Invoke();
             Destroy(gameObject);
             foreach (var deathPrefab in deathPrefabs)
             {
