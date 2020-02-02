@@ -89,7 +89,7 @@ public class Limb : MonoBehaviour
         float travelTime = Mathf.Abs(vel.y / yAxixAccel);
         Debug.Log("travelTime1 = " + travelTime);
         float travelHeight = vel.y * travelTime + .5f * yAxixAccel * travelTime * travelTime; //V * t + 1/2 * a * t^2
-        float totalDistance = Mathf.Abs(travelHeight - dropPosY) + (vel.y * .5f);
+        float totalDistance = Mathf.Abs(travelHeight - dropPosY) - (vel.y * .25f);
 
         travelTime += Mathf.Sqrt(2 * totalDistance / -yAxixAccel);
 
@@ -100,8 +100,11 @@ public class Limb : MonoBehaviour
         Quaternion initRot = transform.rotation;
         for (float t = 0; t <= travelTime; t += Time.deltaTime * 1.0f)
         {
-            transform.position = transform.position + vel * Time.deltaTime;
-            vel.y += Time.deltaTime * yAxixAccel;
+            if (transform.position.y >= groundY)
+            {
+                transform.position = transform.position + vel * Time.deltaTime;
+                vel.y += Time.deltaTime * yAxixAccel;
+            }
             
             float et = t / travelTime;
             Debug.Log("t = " + t);
