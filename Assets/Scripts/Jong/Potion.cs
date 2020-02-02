@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Potion : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class Potion : MonoBehaviour
     ///TODO: animation
     IEnumerator DisappearAnim()
     {
+        GetComponent<SortByY>().enabled = false;
+        GetComponentInChildren<SortingGroup>().sortingOrder = 999999;
+        GetComponent<SpriteRenderer>().sortingOrder = 999999;
         AudioSource.PlayClipAtPoint(drinkSound, Camera.main.transform.position);
         GetComponent<Animator>().Play("drink");
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }

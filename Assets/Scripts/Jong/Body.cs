@@ -66,7 +66,7 @@ public class Body : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Incoming:" + newPart.partType);
+        //Debug.Log("Incoming:" + newPart.partType);
         DropPart(newPart.partType);
         bodyParts[newPart.partType] = newPart;
         bodyParts[newPart.partType].Reattach(this);
