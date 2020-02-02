@@ -509,10 +509,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3651535660788556593}
     m_Modifications:
+    - target: {fileID: 3101064291887722235, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354178496403587052, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812157128369093936, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5180124957287439768, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291950721194582338, guid: e0cce88d31a98fc4997c935a036ca09a,
+        type: 3}
+      propertyPath: maxTime
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6772939635438453453, guid: e0cce88d31a98fc4997c935a036ca09a,
         type: 3}
