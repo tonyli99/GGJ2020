@@ -12,7 +12,7 @@ public class Limb : MonoBehaviour
 
     public Body hostBody;
 
-    Transform oldBody;
+    float groundY;
     List<SpriteRenderer> spriteList;
     Collider2D col;
     Color currentColor;
@@ -60,7 +60,7 @@ public class Limb : MonoBehaviour
         {
             if (hostBody != null)
             {
-                oldBody = hostBody.transform;
+                groundY = hostBody.transform.position.y;
                 //ground.x = ground.x + Random.value * 0.2f;
                 hostBody.LostPart(partType);
 
@@ -76,39 +76,13 @@ public class Limb : MonoBehaviour
         }
     }
 
-    IEnumerator DroppingAnimation()
-    {
-        yield return null;
-        Vector3 dropPos = oldBody.position;
-        //transform.localScale = Vector3.one;
-        Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
-        for (float t = 0; t <= 1; t += Time.deltaTime * 2.0f)
-        {
-            transform.position = Vector3.Lerp(transform.position, dropPos, t);
-            transform.rotation = Quaternion.Lerp(transform.rotation, q, t);
-            foreach (Transform ct in transform)
-            {
-                ct.localRotation = Quaternion.Lerp(ct.localRotation, Quaternion.identity, t);
-            }
-            yield return null;
-        }
-
-        currentColor = Color.grey;
-        Decay();
-
-        if (currentTime < maxTime)
-        {
-            col.enabled = true;
-        }
-    }
-
     IEnumerator TossingAnimation()
     {
         yield return null;
         float yAxixAccel = -10;
         Vector3 vel = new Vector3((Random.value - .5f) * 8, Random.value * 8, 0);
         Debug.Log("vel.y = " + vel.y);
-        float dropPosY = oldBody.position.y;
+        float dropPosY = groundY;
         transform.localScale = Vector3.one;
         Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
 
@@ -151,17 +125,17 @@ public class Limb : MonoBehaviour
 
     public void Drop()
     {
-        oldBody = hostBody.transform;
+        groundY = hostBody.transform.position.y;
         hostBody = null;
         transform.parent = null;
 
-        StartCoroutine(DroppingAnimation());
+        StartCoroutine(TossingAnimation());
     }
 
     Vector3 partPos;
     public void Toss()
     {
-        oldBody = hostBody.transform;
+        groundY = hostBody.transform.position.y;
         partPos = transform.position;
         hostBody = null;
         transform.parent = null;
