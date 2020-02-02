@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 4
   decayMultiplier: 1
-  maxTime: 80
+  maxTime: 90
   hostBody: {fileID: 0}
 --- !u!61 &3865116544391342970
 BoxCollider2D:
