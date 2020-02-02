@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 4
   decayMultiplier: 1
-  maxTime: 20
+  maxTime: 50
   hostBody: {fileID: 0}
 --- !u!61 &834599929058296552
 BoxCollider2D:
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 3
   decayMultiplier: 1
-  maxTime: 20
+  maxTime: 50
   hostBody: {fileID: 0}
 --- !u!61 &3648102256523018985
 BoxCollider2D:
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 0
   decayMultiplier: 1
-  maxTime: 30
+  maxTime: 50
   hostBody: {fileID: 0}
 --- !u!58 &8540929932072180606
 CircleCollider2D:
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 1
   decayMultiplier: 1
-  maxTime: 10
+  maxTime: 50
   hostBody: {fileID: 0}
 --- !u!61 &3982376148819077282
 BoxCollider2D:
@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 2
   decayMultiplier: 1
-  maxTime: 10
+  maxTime: 50
   hostBody: {fileID: 0}
 --- !u!61 &1372616949889715889
 BoxCollider2D:
