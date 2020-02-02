@@ -50,7 +50,12 @@ public class Body : MonoBehaviour
     IEnumerator WaitAndDrop()
     {
         yield return new WaitForSeconds(1);
+        //ca.SetAnimatorStatus(false);
         DropAll();
+
+        //yield return new WaitForSeconds(.1f);
+        //ca.SetAnimatorStatus(true);
+
     }
 
     // replace or attach body part
@@ -61,7 +66,7 @@ public class Body : MonoBehaviour
         {
             return;
         }
-        //Debug.Log("Incoming:" + newPart.partType);
+        Debug.Log("Incoming:" + newPart.partType);
         DropPart(newPart.partType);
         bodyParts[newPart.partType] = newPart;
         bodyParts[newPart.partType].Reattach(this);
@@ -78,20 +83,19 @@ public class Body : MonoBehaviour
         {
             Limb droppingPart = bodyParts[pt];
             bodyParts[pt] = null;
-            droppingPart.Drop();
+            droppingPart.Toss();
         }
     }
 
     public void DropAll()
     {
-        ca.StopAnimator();
-        bodyParts[Limb.PartType.LeftArm].Toss();
-        return;
+        //bodyParts[Limb.PartType.Head].Toss();
+        //return;
         foreach (Limb limb in bodyParts.Values)
         {
             if (limb != null)
             {
-                limb.Drop();
+                limb.Toss();
             }
         }
     }
