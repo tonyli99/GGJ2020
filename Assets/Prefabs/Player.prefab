@@ -214,6 +214,9 @@ MonoBehaviour:
   runParameter: Zwalk
   hopParameter: Zhop
   attackParameters:
+  - Zattackclaw
+  - ZBite
+  - ZattackSpin
   - Zattack
   - ZBite
   attackCollider: {fileID: 8167323911589034368}
