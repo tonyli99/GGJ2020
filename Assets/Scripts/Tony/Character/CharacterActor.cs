@@ -41,6 +41,7 @@ public class CharacterActor : MonoBehaviour
         controller = GetComponent<CharacterController2D>();
         animator = GetComponentInChildren<Animator>();
         body = GetComponent<Body>();
+        body.ca = this;
         currentAnimParameter = idleParameter;
     }
 
@@ -140,5 +141,10 @@ public class CharacterActor : MonoBehaviour
     public void Pickup()
     {
         body.ReplaceWith(controller.touchingLimb);
+    }
+
+    public void StopAnimator()
+    {
+        animator.Rebind();
     }
 }
