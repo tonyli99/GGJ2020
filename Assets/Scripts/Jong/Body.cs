@@ -23,7 +23,7 @@ public class Body : MonoBehaviour
     //public float rightLegMaxDecayTime;
 
     public Transform bodyTranform;
-
+    public CharacterActor ca;
     private void Awake()
     {
         bodyParts = new Dictionary<Limb.PartType, Limb>(5);
@@ -42,13 +42,26 @@ public class Body : MonoBehaviour
         //maxDecayTime[Limb.PartType.RightLeg] = rightLegMaxDecayTime;
     }
 
+    private void Start()
+    {
+        StartCoroutine(WaitAndDrop());
+    }
+
+    IEnumerator WaitAndDrop()
+    {
+        yield return new WaitForSeconds(1);
+        DropAll();
+    }
+
     // replace or attach body part
     public void ReplaceWith(Limb newPart)
     {
+
         if (newPart == null)
         {
             return;
         }
+        //Debug.Log("Incoming:" + newPart.partType);
         DropPart(newPart.partType);
         bodyParts[newPart.partType] = newPart;
         bodyParts[newPart.partType].Reattach(this);
@@ -66,6 +79,20 @@ public class Body : MonoBehaviour
             Limb droppingPart = bodyParts[pt];
             bodyParts[pt] = null;
             droppingPart.Drop();
+        }
+    }
+
+    public void DropAll()
+    {
+        ca.StopAnimator();
+        bodyParts[Limb.PartType.LeftArm].Toss();
+        return;
+        foreach (Limb limb in bodyParts.Values)
+        {
+            if (limb != null)
+            {
+                limb.Drop();
+            }
         }
     }
 
@@ -93,5 +120,10 @@ public class Body : MonoBehaviour
         {
             part.AddDamage(damange);
         }
+    }
+
+    public void TakePotion(float life)
+    {
+        TakeDamange(-life);
     }
 }

@@ -31,6 +31,7 @@ public class Limb : MonoBehaviour
         if (hostBody != null && hostBody.hostType == Body.HostType.Zombie)
         {
             hostBody.ReplaceWith(this);
+            //Debug.Log("Limb:" + partType);
         }
     }
 
@@ -76,8 +77,9 @@ public class Limb : MonoBehaviour
 
     IEnumerator DroppingAnimation()
     {
-        Vector3 dropPos =  oldBody.position;
-        transform.localScale = Vector3.one;
+        yield return null;
+        Vector3 dropPos = oldBody.position;
+        //transform.localScale = Vector3.one;
         Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
         for (float t = 0; t <= 1; t += Time.deltaTime * 2.0f)
         {
@@ -99,13 +101,62 @@ public class Limb : MonoBehaviour
         }
     }
 
+    IEnumerator TossingAnimation()
+    {
+        yield return null;
+        Vector3 vel = new Vector3((Random.value - .5f) * 10, Random.value * 10, 0);
+        float animTime = vel.y / 5;
+        Debug.Log("vel.y = " + vel.y);
+        Debug.Log("AniTime = " + animTime);
+        Vector3 dropPos = oldBody.position;
+        transform.localScale = Vector3.one;
+        Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
+
+        float t = 0;
+        while (transform.position.y > dropPos.y)
+        {
+            Vector3 pos = transform.position + vel * Time.deltaTime;
+            vel.y -= Time.deltaTime * 10f;
+            transform.position = pos;
+
+            float et = t / animTime;
+        Debug.Log("t = " + t);
+        Debug.Log("et = " + et);
+            transform.rotation = Quaternion.Lerp(transform.rotation, q, et);
+            foreach (Transform ct in transform)
+            {
+                ct.localRotation = Quaternion.Lerp(ct.localRotation, Quaternion.identity, et);
+            }
+            t += Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log("t = " + t);
+
+        currentColor = Color.grey;
+        Decay();
+
+        if (currentTime < maxTime)
+        {
+            col.enabled = true;
+        }
+    }
+
     public void Drop()
     {
         oldBody = hostBody.transform;
         hostBody = null;
         transform.parent = null;
 
-        StartCoroutine("DroppingAnimation");
+        StartCoroutine(DroppingAnimation());
+    }
+
+    public void Toss()
+    {
+        oldBody = hostBody.transform;
+        hostBody = null;
+        transform.parent = null;
+
+        StartCoroutine(TossingAnimation());
     }
 
     public void Reattach(Body body)
@@ -125,6 +176,7 @@ public class Limb : MonoBehaviour
     public void AddDamage(float damage)
     {
         currentTime += damage;
+        currentTime = Mathf.Clamp(currentTime, 0, maxTime);
     }
 
 }
