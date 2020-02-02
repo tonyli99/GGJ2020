@@ -14,6 +14,8 @@ public class Limb : MonoBehaviour
 
     float groundY;
     List<SpriteRenderer> spriteList;
+    private Shader originalShader;
+    private Shader flashShader;
     Collider2D col;
     Color currentColor;
     private void Awake()
@@ -27,12 +29,14 @@ public class Limb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        originalShader = spriteList[0].material.shader;
+        flashShader = Shader.Find("GUI/Text Shader");
+
         hostBody = GetComponentInParent<Body>();
         if (hostBody != null)
         //if (hostBody != null && hostBody.hostType == Body.HostType.Zombie)
         {
             hostBody.ReplaceWith(this);
-            //Debug.Log("Limb:" + partType);
         }
     }
 
@@ -61,14 +65,20 @@ public class Limb : MonoBehaviour
             if (hostBody != null)
             {
                 groundY = hostBody.transform.position.y;
-                //ground.x = ground.x + Random.value * 0.2f;
                 hostBody.LostPart(partType);
 
             }
             currentTime = maxTime;
         }
-
-        Color c = currentColor * (1 - currentTime / maxTime);
+        Color c = currentColor;
+        if (touched)
+        {
+            c = touchedColor * (1 - (Time.time - (int)(Time.time)) * .5f);
+        }
+        else
+        {
+            c = currentColor * (1 - currentTime / maxTime);
+        }
         c.a = 1;
         foreach (var sr in spriteList)
         {
@@ -81,21 +91,15 @@ public class Limb : MonoBehaviour
         yield return null;
         float yAxixAccel = -10;
         Vector3 vel = new Vector3((Random.value - .5f) * 8, Random.value * 8, 0);
-        //Debug.Log("vel.y = " + vel.y);
         float dropPosY = groundY;
         transform.localScale = Vector3.one;
         Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
 
         float travelTime = Mathf.Abs(vel.y / yAxixAccel);
-        //Debug.Log("travelTime1 = " + travelTime);
         float travelHeight = vel.y * travelTime + .5f * yAxixAccel * travelTime * travelTime; //V * t + 1/2 * a * t^2
         float totalDistance = Mathf.Abs(travelHeight - dropPosY) - (vel.y * .25f);
 
         travelTime += Mathf.Sqrt(2 * totalDistance / -yAxixAccel);
-
-        //Debug.Log("travelHeight = " + travelHeight);
-        //Debug.Log("totalDistance = " + totalDistance);
-        //Debug.Log("travelTime = " + travelTime);
 
         Quaternion initRot = transform.rotation;
         for (float t = 0; t <= travelTime; t += Time.deltaTime * 1.0f)
@@ -105,10 +109,8 @@ public class Limb : MonoBehaviour
                 transform.position = transform.position + vel * Time.deltaTime;
                 vel.y += Time.deltaTime * yAxixAccel;
             }
-            
+
             float et = t / travelTime;
-            //Debug.Log("t = " + t);
-            //Debug.Log("et = " + et);
             transform.rotation = Quaternion.Lerp(initRot, q, et);
             foreach (Transform ct in transform)
             {
@@ -120,7 +122,7 @@ public class Limb : MonoBehaviour
         currentColor = Color.grey;
         Decay();
 
-        if (currentTime < maxTime)
+        if (currentTime < maxTime && Random.value >= .3f)
         {
             col.enabled = true;
         }
@@ -170,4 +172,25 @@ public class Limb : MonoBehaviour
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
     }
 
+    private bool touched = false;
+    private Color touchedColor = Color.yellow;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        touched = true;
+        SetShader(flashShader);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        touched = false;
+        SetShader(originalShader);
+    }
+
+    private void SetShader(Shader shader)
+    {
+        foreach (var sr in spriteList)
+        {
+            sr.material.shader = shader;
+        }
+    }
 }
