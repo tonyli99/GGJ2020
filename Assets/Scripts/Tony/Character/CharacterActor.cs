@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,14 +53,28 @@ public class CharacterActor : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                if (movement.magnitude > 0.01f)
+                var numLegs = GetNumLegs();
+                if (numLegs == 0) // player died
                 {
-                    var numLegs = GetNumLegs();
-                    if (numLegs == 0 && name == "Player")
+                    var players = FindObjectsOfType<PlayerInput>();
+                    if (players.Length == 2)
                     {
-                        GameOverScreen.GameOver();
+                        // Destroy player but leave other playing:
+                        Destroy(gameObject);
+                        var otherPlayer = (players[0].gameObject == gameObject) ? players[1] : players[0];
+                        var targetGroup = FindObjectOfType<CinemachineTargetGroup>();
+                        targetGroup.m_Targets[0].target = otherPlayer.transform;
+                        targetGroup.m_Targets[1].target = null;
                     }
                     else
+                    {
+                        // No  players left, end:
+                        GameOverScreen.GameOver();
+                    }
+                }
+                else
+                {
+                    if (movement.magnitude > 0.01f)
                     {
                         var desiredParam = (numLegs == 1) ? hopParameter : runParameter;
                         if (currentAnimParameter != desiredParam)
@@ -67,12 +82,12 @@ public class CharacterActor : MonoBehaviour
                             AnimatorCrossFade(desiredParam);
                         }
                     }
+                    else if (movement.magnitude < 0.01f && currentAnimParameter != idleParameter)
+                    {
+                        AnimatorCrossFade(idleParameter);
+                    }
+                    controller.movement = new Vector2(movement.x * horizontalSpeed, movement.y * verticalSpeed);
                 }
-                else if (movement.magnitude < 0.01f && currentAnimParameter != idleParameter)
-                {
-                    AnimatorCrossFade(idleParameter);
-                }
-                controller.movement = new Vector2(movement.x * horizontalSpeed, movement.y * verticalSpeed);
                 break;
             case State.Sprinting:
                 controller.movement = new Vector2(movement.x * sprintSpeed, movement.y * verticalSpeed);

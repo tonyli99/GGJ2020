@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player2Join : MonoBehaviour
 {
     public GameObject player2;
+    public GameObject player2vcam;
 
     void Update()
     {
@@ -12,6 +13,7 @@ public class Player2Join : MonoBehaviour
         {
             player2.transform.position = FindObjectOfType<PlayerInput>().transform.position + 2 * Vector3.left;
             player2.SetActive(true);
+            player2vcam.SetActive(true);
             Destroy(gameObject);
         }
     }

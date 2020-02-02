@@ -81,21 +81,21 @@ public class Limb : MonoBehaviour
         yield return null;
         float yAxixAccel = -10;
         Vector3 vel = new Vector3((Random.value - .5f) * 8, Random.value * 8, 0);
-        Debug.Log("vel.y = " + vel.y);
+        //Debug.Log("vel.y = " + vel.y);
         float dropPosY = groundY;
         transform.localScale = Vector3.one;
         Quaternion q = Quaternion.Euler(0, 0, 90 * (Random.value > .5f ? 1 : -1));
 
         float travelTime = Mathf.Abs(vel.y / yAxixAccel);
-        Debug.Log("travelTime1 = " + travelTime);
+        //Debug.Log("travelTime1 = " + travelTime);
         float travelHeight = vel.y * travelTime + .5f * yAxixAccel * travelTime * travelTime; //V * t + 1/2 * a * t^2
         float totalDistance = Mathf.Abs(travelHeight - dropPosY) - (vel.y * .25f);
 
         travelTime += Mathf.Sqrt(2 * totalDistance / -yAxixAccel);
 
-        Debug.Log("travelHeight = " + travelHeight);
-        Debug.Log("totalDistance = " + totalDistance);
-        Debug.Log("travelTime = " + travelTime);
+        //Debug.Log("travelHeight = " + travelHeight);
+        //Debug.Log("totalDistance = " + totalDistance);
+        //Debug.Log("travelTime = " + travelTime);
 
         Quaternion initRot = transform.rotation;
         for (float t = 0; t <= travelTime; t += Time.deltaTime * 1.0f)
@@ -107,8 +107,8 @@ public class Limb : MonoBehaviour
             }
             
             float et = t / travelTime;
-            Debug.Log("t = " + t);
-            Debug.Log("et = " + et);
+            //Debug.Log("t = " + t);
+            //Debug.Log("et = " + et);
             transform.rotation = Quaternion.Lerp(initRot, q, et);
             foreach (Transform ct in transform)
             {
