@@ -181,7 +181,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 5.4799995
   m_canvasRenderer: {fileID: 4996319029941669911}
   m_TextComponent: {fileID: 1188609746662165844}
   m_materialReferenceIndex: 1
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player 1
+  m_text: 'Player 1:
 
     WASD/Left Stick: move
 
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1188609746662165844}
-    characterCount: 207
+    characterCount: 208
     spriteCount: 0
     spaceCount: 33
     wordCount: 42
